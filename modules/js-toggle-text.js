@@ -5,7 +5,8 @@
 /*
 Adds functionality for any components with a data-toggle-text attribute.
 
-data-toggle-text = On click the elements text toggles to this
+data-toggle-text (Required)
+- On click the elements text content toggles to this
 */
 
 /*
