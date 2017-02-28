@@ -3,15 +3,34 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Adds functionality for any components with a data-toggle-text attribute.
+JS-TOGGLE-TEXT adds functionality for any components with a data-toggle-text attribute.
 
+It allows you to toggle text content of an element on click.
+*/
+
+
+// DATA ATTRIBUTES
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
 data-toggle-text (Required)
 - On click the elements text content toggles to this
 */
 
+
+// EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
 /*
 <div data-toggle-text="Goodbye">Hello</div>
+
+In the example above, when our element is clicked, the "hello" text toggles to "goodbye". When clicked again,
+it swaps back.
 */
+
+
+// CODE
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 (function(){
 

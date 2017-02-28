@@ -2,6 +2,32 @@
 // SWIPE DETECT FUNCTION
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Sets up a swipe event listener
+/*
+
+
+// EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+// Import helper
+var swipeDetect = require("../helpers/swipeDetect.js");
+
+// Grab element
+var myElem = document.querySelector(".my-elem");
+
+// Set up event listener to trigger on left swipe
+swipeDetect(myElem, function(swipedir){
+	if(swipedir === "left") {
+		// Define action
+	}
+})
+*/
+
+
+// CODE
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // http://www.javascriptkit.com/javatutors/touchevents2.shtml
 var swipeDetect = function(el, callback){	

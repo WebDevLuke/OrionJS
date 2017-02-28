@@ -3,10 +3,16 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-JS-CLASS component allows you to quickly define class-based click and/or swipe events on elements.
+JS-CLASS adds functionality for any components with data-class and data-class-element attributes.
 
-You can define multiple behaviours by defining comma seperated lists. Each item corosponds to it's matching index in all the related data tags.
+It allows you to quickly define class-based click and/or swipe events on elements.
+*/
 
+
+// DATA ATTRIBUTES
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
 data-class (Required)
 - A comma seperated list of classes you wish to add.
 
@@ -28,7 +34,13 @@ data-class-swipe (Optional)
 - You can also specify if or not the swipe event should replace the click event, or if both should coexist. To do this add a comma then either true or false after your direction.
 	- "true": Swipe event replaces click event
 	- "false": Swipe event and click event are both added
+*/
 
+
+// EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
 <div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
 
 In the above example, when our element is either clicked or a left swipe is derected the following happens:-
@@ -36,6 +48,11 @@ In the above example, when our element is either clicked or a left swipe is dere
 	2) is-invalid class is removed from js-elem2
 	3) is-hidden class is added to js-elem3 
 */ 
+
+
+// CODE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
 
 (function(){
 

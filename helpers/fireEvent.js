@@ -6,6 +6,25 @@
 Manually fires the given event for the given element
 */
 
+
+// EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+// Import helper
+var fireEvent = require("../helpers/fireEvent.js");
+
+// Grab element
+var myElem = document.querySelector(".my-elem");
+
+// Fire event
+fireEvent(myElem, "click");
+*/
+
+
+// CODE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
 module.exports = function(elem, event) {
 	if (document.createEventObject){
 		// dispatch for IE
