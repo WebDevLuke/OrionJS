@@ -29,9 +29,9 @@ gulp.task('build', function() {
 	});
 });
 
-
 // WATCH FUNCTION
 gulp.task("watch", function() {
 	// JS
-	gulp.watch('test/test.global.js',['js']);
+	gulp.watch('modules/*.js', ['build']);
+	gulp.watch('helpers/*.js', ['build']);
 });

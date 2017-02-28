@@ -19,12 +19,12 @@ data-toggle-text = On click the elements text toggles to this
 
 	if(elem.length){
 		// Add event listeners to each one
-		for(var i = 0; i < elem.length; i++){
+		for(var a = 0; a < elem.length; a++){
 
 			// Grab and store original value
-			elem[i].setAttribute("data-toggle-original", elem[i].innerText);
+			elem[a].setAttribute("data-toggle-original", elem[i].innerText);
 			// Add event listener
-			elem[i].addEventListener("click", function(e){
+			elem[a].addEventListener("click", function(e){
 				// Prevent default action of element
 				e.preventDefault();
 				// Grab toggle value

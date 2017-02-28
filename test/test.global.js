@@ -14,6 +14,4 @@ Construct our JS by importing required partials
 Reusable JS functionality
 */
 
-var fireEvent = require("../helpers/fireEvent.js");
-
-require("../modules/js-active.js");
+require("../modules/js-class.js");
