@@ -5,7 +5,7 @@
 /*
 DATA-CLASS adds functionality for any components with data-class and data-class-element attributes.
 
-It allows you to quickly define class-based click and/or swipe events on elements.
+It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
 */
 
 

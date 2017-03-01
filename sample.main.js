@@ -3,20 +3,24 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Test our JS gulp build task by importing all modules and helpers
+Construct our JS by importing required partials
 */
 
 
 // HELPERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-var fireEvent = require("../helpers/fireEvent.js");
-var getIndex = require("../helpers/getIndex.js");
-var swipeDetect = require("../helpers/swipeDetect.js");
+//var fireEvent = require("../../node_modules/orionjs/modules/fireEvent.js");
+//var getIndex = require("../../node_modules/orionjs/modules/getIndex.js");
+//var swipeDetect = require("../../node_modules/orionjs/modules/swipeDetect.js");
 
 
 // MODULES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-require("../modules/data-class.js");
-require("../modules/data-toggle-text.js");
+/*
+Reusable JS functionality
+*/
+
+require("../../node_modules/orionjs/modules/data-class.js");
+require("../../node_modules/orionjs/modules/data-toggle-text.js");

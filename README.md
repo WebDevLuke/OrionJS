@@ -24,6 +24,10 @@ var getIndex = require("node_modules/orionjs/helpers/getIndex.js");
 require("node_modules/orionjs/modules/data-class.js");
 ```
 
+Or you can copy `node_modules/orionjs/sample.main.js` and use that as a starting point.
+
+You may need to edit the paths referencing `node_modules` to resemble your own project directory structure.
+
 ## Helpers
 OrionJS provides you with helper functions which help you achieve common tasks. Please refer to a helper's source code for full documentation.
 
@@ -42,7 +46,7 @@ In addition to helpers, you also have access to modules. These are reusable func
 Please refer to a modules's source code for full documentation.
 
 ### data-class
-data-class adds functionality for any components with `data-class` and `data-class-element` attributes. It allows you to quickly define class-based click and/or swipe events on elements.
+data-class adds functionality for any components with `data-class` and `data-class-element` attributes. It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
 
 ### data-toggle-text
 data-toggle-text adds functionality for any components with a `data-toggle-text` attribute. It allows you to toggle text content of an element on click.
