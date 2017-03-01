@@ -2,6 +2,8 @@
 	 <img height="67" width="387" src="https://cdn.rawgit.com/WebDevLuke/OrionJS/develop/misc/orionjs-logo.svg">
 </h1>
 
+[![CircleCI](https://circleci.com/gh/WebDevLuke/OrionJS/tree/master.svg?style=shield)](https://circleci.com/gh/WebDevLuke/OrionJS/tree/master)
+
 OrionJS is a simple collection of reusable functions to help streamline DOM manipulation in UI development
 
 ## Getting Started
