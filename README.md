@@ -76,7 +76,7 @@ swipeDetect(myElem, function(swipedir){
 ## Modules
 In addition to helpers, you also have access to modules. These are reusable functions which are attached to elements in HTML via data attributes. They make common DOM manipulation tasks quick and easy to implement.
 
-#### data-class
+### data-class
 DATA-CLASS adds functionality for any components with data-class and data-class-element attributes. It allows you to quickly define class-based click and/or swipe events on elements.
 
 ***
@@ -108,13 +108,14 @@ DATA-CLASS adds functionality for any components with data-class and data-class-
 - You can also specify if or not the swipe event should replace the click event, or if both should coexist. To do this add a comma then either true or false after your direction.
 	- `true`: Swipe event replaces click event
 	- `false`: Swipe event and click event are both added
-	
+
 ***
 
 ```
 <div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
 ```
 In the above example, when our element is either clicked or a left swipe is derected the following happens:-
+
 1. is-active class is toggled on js-elem
 2. is-invalid class is removed from js-elem2
 3. is-hidden class is added to js-elem3 
