@@ -25,6 +25,35 @@ require("node_modules/orionjs/modules/data-class.js");
 ```
 
 ## Helpers
+OrionJS provides you with helper functions which help you achieve common tasks. These are:-
+
+### fireEvent
+Manually fires the given event for the given element.
+
+```
+// Import helper
+var fireEvent = require("node_modules/orionjs/helpers/fireEvent.js");
+
+// Grab element
+var myElem = document.querySelector(".my-elem");
+
+// Fire event
+fireEvent(myElem, "click");
+```
+
+### getIndex
+Returns the index of the given element
+
+```
+// Import helper
+var getIndex = require("../helpers/getIndex.js");
+
+// Grab element
+var myElem = document.querySelector(".my-elem");
+
+// Get index of myElem
+var index = getIndex(myElem);
+```
 
 
 ## Modules
