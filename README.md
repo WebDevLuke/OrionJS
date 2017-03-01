@@ -79,21 +79,21 @@ In addition to helpers, you also have access to modules. These are reusable func
 #### data-class
 DATA-CLASS adds functionality for any components with data-class and data-class-element attributes. It allows you to quickly define class-based click and/or swipe events on elements.
 
----
+***
 `data-class` (Required)
 - A comma seperated list of classes you wish to add.
----
+***
 
 `data-class-element` (Required)
 - A comma seperated list of elements data-class will target.
----
+***
 
 `data-class-behaviour` (Optional)
 - The behaviour which occurs when triggered. You have 3 choices:-
 	- `toggle`: This adds the class if it's not already present or removes if it is
 	- `add`: This adds the class if it's not present 
 	- `remove`: This removes the class if it's present
----
+***
 
 `data-class-swipe` (Optional)
 - If defined, the specified swipe direction triggers class functionality. You have 4 choices for directions:-
@@ -104,7 +104,7 @@ DATA-CLASS adds functionality for any components with data-class and data-class-
 - You can also specify if or not the swipe event should replace the click event, or if both should coexist. To do this add a comma then either true or false after your direction.
 	- `true`: Swipe event replaces click event
 	- `false`: Swipe event and click event are both added
----
+***
 
 ```
 <div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
