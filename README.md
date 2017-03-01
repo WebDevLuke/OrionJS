@@ -25,100 +25,27 @@ require("node_modules/orionjs/modules/data-class.js");
 ```
 
 ## Helpers
-OrionJS provides you with helper functions which help you achieve common tasks. These are:-
+OrionJS provides you with helper functions which help you achieve common tasks. Please refer to a helper's source code for full documentation.
 
 ### fireEvent
 Manually fires the given event for the given element.
 
-```
-// Import helper
-var fireEvent = require("node_modules/orionjs/helpers/fireEvent.js");
-
-// Grab element
-var myElem = document.querySelector(".my-elem");
-
-// Fire event
-fireEvent(myElem, "click");
-```
-
 ### getIndex
 Returns the index of the given element
-
-```
-// Import helper
-var getIndex = require("../helpers/getIndex.js");
-
-// Grab element
-var myElem = document.querySelector(".my-elem");
-
-// Get index of myElem
-var index = getIndex(myElem);
-```
 
 ### swipeDetect
 Sets up a swipe event listener
 
-```
-// Import helper
-var swipeDetect = require("node_modules/orionjs/helpers/swipeDetect.js");
-
-// Grab element
-var myElem = document.querySelector(".my-elem");
-
-// Set up event listener to trigger on left swipe
-swipeDetect(myElem, function(swipedir){
-	if(swipedir === "left") {
-		// Define action
-	}
-})
-```
-
 ## Modules
 In addition to helpers, you also have access to modules. These are reusable functions which are attached to elements in HTML via data attributes. They make common DOM manipulation tasks quick and easy to implement.
 
+Please refer to a modules's source code for full documentation.
+
 ### data-class
-DATA-CLASS adds functionality for any components with data-class and data-class-element attributes. It allows you to quickly define class-based click and/or swipe events on elements.
+data-class adds functionality for any components with `data-class` and `data-class-element` attributes. It allows you to quickly define class-based click and/or swipe events on elements.
 
-***
-
-`data-class` (Required)
-- A comma seperated list of classes you wish to add.
-
-***
-
-`data-class-element` (Required)
-- A comma seperated list of elements data-class will target.
-
-***
-
-`data-class-behaviour` (Optional)
-- The behaviour which occurs when triggered. You have 3 choices:-
-	- `toggle`: This adds the class if it's not already present or removes if it is
-	- `add`: This adds the class if it's not present 
-	- `remove`: This removes the class if it's present
-
-***
-
-`data-class-swipe` (Optional)
-- If defined, the specified swipe direction triggers class functionality. You have 4 choices for directions:-
-	- `up`
-	- `right`
-	- `down`
-	- `left`
-- You can also specify if or not the swipe event should replace the click event, or if both should coexist. To do this add a comma then either true or false after your direction.
-	- `true`: Swipe event replaces click event
-	- `false`: Swipe event and click event are both added
-
-***
-
-```
-<div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
-```
-In the above example, when our element is either clicked or a left swipe is derected the following happens:-
-
-1. is-active class is toggled on js-elem
-2. is-invalid class is removed from js-elem2
-3. is-hidden class is added to js-elem3 
+### data-toggle-text
+data-toggle-text adds functionality for any components with a `data-toggle-text` attribute. It allows you to toggle text content of an element on click.
 
 
 ## Using with OrionBP
