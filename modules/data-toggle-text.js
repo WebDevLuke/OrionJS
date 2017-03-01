@@ -1,9 +1,9 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
-// JS-TOGGLE-TEXT COMPONENT
+// DATA-TOGGLE-TEXT COMPONENT
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-JS-TOGGLE-TEXT adds functionality for any components with a data-toggle-text attribute.
+DATA-TOGGLE-TEXT adds functionality for any components with a data-toggle-text attribute.
 
 It allows you to toggle text content of an element on click.
 */

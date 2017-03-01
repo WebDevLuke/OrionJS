@@ -1,9 +1,9 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
-// JS-CLASS COMPONENT
+// DATA-CLASS COMPONENT
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-JS-CLASS adds functionality for any components with data-class and data-class-element attributes.
+DATA-CLASS adds functionality for any components with data-class and data-class-element attributes.
 
 It allows you to quickly define class-based click and/or swipe events on elements.
 */

@@ -14,6 +14,22 @@ You can also use OrionJS on it's own as a part of your own framework. To install
 npm install orionjs --save
 ```
 
+Then you can import modules and/or helpers using the commonJS pattern:-
+
+```
+// Import getIndex helper
+var getIndex = require("node_modules/orionjs/helpers/getIndex.js");
+
+// Import data-class module
+require("node_modules/orionjs/modules/data-class.js");
+```
+
+## Helpers
+
+
+## Modules
+
+
 ## Using with OrionBP
 When you use OrionJS via the front-end boilerplate [OrionBP](https://github.com/WebDevLuke/Orion-Framework), you gain access to specifically built Gulp tasks to compile and optimise your JS. These JS tasks include:
 
