@@ -3,20 +3,12 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Test our JS gulp build task by importing all modules and helpers
+Test our JS gulp build task
 */
 
-
-// HELPERS
+// COMPONENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-var fireEvent = require("../helpers/fireEvent.js");
-var getIndex = require("../helpers/getIndex.js");
-var swipeDetect = require("../helpers/swipeDetect.js");
-
-
-// MODULES
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-require("../modules/data-class.js");
-require("../modules/data-toggle-text.js");
+require("../components/data-class.js");
+require("../components/data-cookie.js");
+require("../components/data-toggle-text.js");

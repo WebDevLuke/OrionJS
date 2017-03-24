@@ -43,7 +43,7 @@ data-class-swipe (Optional)
 /*
 <div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
 
-In the above example, when our element is either clicked or a left swipe is derected the following happens:-
+In the above example, when our element is either clicked or a left swipe is detected the following happens:-
 	1) is-active class is toggled on js-elem
 	2) is-invalid class is removed from js-elem2
 	3) is-hidden class is added to js-elem3 
@@ -73,7 +73,7 @@ In the above example, when our element is either clicked or a left swipe is dere
 	elemRef,
 	a,
 	b,
-	processClass = function(elem){
+	processChange = function(elem){
 		// Grab data-class data and convert to array
 		dataClass = elem.getAttribute("data-class");
 		dataClass = dataClass.split(", ");
@@ -133,13 +133,13 @@ In the above example, when our element is either clicked or a left swipe is dere
 						// Prevent default action of element
 						e.preventDefault();	
 						// Run class function
-						processClass(this);
+						processChange(this);
 					});
 				}
 				swipeDetect(elems[a], function(swipedir){
 					if(swipedir === direction) {
 						// Run class function
-						processClass(currentElem);
+						processChange(currentElem);
 					}
 				})
 			}
@@ -149,7 +149,7 @@ In the above example, when our element is either clicked or a left swipe is dere
 					// Prevent default action of element
 					e.preventDefault();	
 					// Run class function
-					processClass(this);
+					processChange(this);
 				});
 			}
 		}
