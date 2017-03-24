@@ -54,7 +54,7 @@ Please refer to a modules's source code for full documentation.
 data-class adds functionality for any components with `data-class` and `data-class-element` attributes. It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
 
 ### data-toggle-text
-data-toggle-text adds functionality for any components with a `data-toggle-text` attribute. It allows you to toggle text content of an element on click.
+data-toggle-text adds functionality for any components with a `data-toggle-text` attribute. It allows you to toggle text content of an element on click and/or swipe events.
 
 
 ## Using with OrionBP
