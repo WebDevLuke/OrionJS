@@ -10,19 +10,18 @@ Construct our JS by importing required partials
 // HELPERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-//var closestParent = require("../../node_modules/orionjs/modules/closestParent.js");
-//var fireEvent = require("../../node_modules/orionjs/modules/fireEvent.js");
-//var getIndex = require("../../node_modules/orionjs/modules/getIndex.js");
-//var swipeDetect = require("../../node_modules/orionjs/modules/swipeDetect.js");
+//var closestParent = require("../../node_modules/orionjs/helpers/closestParent.js");
+//var fireEvent = require("../../node_modules/orionjs/helpers/fireEvent.js");
+//var getIndex = require("../../node_modules/orionjs/helpers/getIndex.js");
+//var swipeDetect = require("../../node_modules/orionjs/helpers/swipeDetect.js");
 
 
-// COMPONENTS
+// ACTIONS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 Reusable JS functionality
 */
 
-require("../../node_modules/orionjs/components/data-class.js");
-require("../../node_modules/orionjs/components/data-cookie.js");
-require("../../node_modules/orionjs/components/data-toggle-text.js");
+require("../../node_modules/orionjs/actions/data-class.js");
+require("../../node_modules/orionjs/actions/data-toggle-text.js");

@@ -45,10 +45,10 @@ Returns the index of the given element
 ### swipeDetect
 Sets up a swipe event listener
 
-## Modules
-In addition to helpers, you also have access to modules. These are reusable functions which are attached to elements in HTML via data attributes. They make common DOM manipulation tasks quick and easy to implement.
+## Actions
+In addition to helpers, you also have access to actions. These are reusable functions which are attached to elements in HTML via data attributes. They make common DOM manipulation tasks quick and easy to implement.
 
-Please refer to a modules's source code for full documentation.
+Please refer to an actions's source code for full documentation.
 
 ### data-class
 data-class adds functionality for any components with `data-class` and `data-class-element` attributes. It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
