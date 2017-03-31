@@ -16,6 +16,12 @@ Construct our JS by importing required partials
 //var swipeDetect = require("../../node_modules/orionjs/helpers/swipeDetect.js");
 
 
+// VENDOR
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+require("../../node_modules/orionjs/vendor/modernizr.js");
+
+
 // ACTIONS
 //--------------------------------------------------------------------------------------------------------------------------------------
 

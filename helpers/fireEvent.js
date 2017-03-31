@@ -3,7 +3,8 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Manually fires the given event for the given element
+Manually fires the given event for the given element. If the browser supports the custom event api, you can
+pass additional data object with an event
 */
 
 
@@ -17,24 +18,34 @@ var fireEvent = require("../helpers/fireEvent.js");
 // Grab element
 var myElem = document.querySelector(".my-elem");
 
-// Fire event
-fireEvent(myElem, "click");
+// Fire custom event with custom data object
+fireEvent(myElem, "signup", {
+	detail: {
+		username: "lukeharrison"
+	}
+});
 */
 
 
 // CODE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-module.exports = function(elem, event) {
-	if (document.createEventObject){
+module.exports = function(elem, event, details) {
+	if(Modernizr.customevent) {
+		// Declare event
+		var myEvent = new CustomEvent(event, details);
+		// Trigger it!
+		elem.dispatchEvent(myEvent);
+	}
+	else if(document.createEventObject){
 		// dispatch for IE
 		var evt = document.createEventObject();
-		elem.fireEvent("on" + event,evt)
+		elem.fireEvent("on" + event, evt)
 	}
 	else{
 		// dispatch for firefox + others
 		var evt = document.createEvent("HTMLEvents");
-		evt.initEvent(event, true, true ); // event type,bubbling,cancelable
+		evt.initEvent(event, true, true); // event type,bubbling,cancelable
 		elem.dispatchEvent(evt);
 	}
 }
