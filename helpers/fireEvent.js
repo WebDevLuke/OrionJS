@@ -30,6 +30,9 @@ fireEvent(myElem, "signup", {
 // CODE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+// Import modernizr
+require("../vendor/modernizr.js");
+
 module.exports = function(elem, event, details) {
 	if(Modernizr.customevent) {
 		// Declare event
