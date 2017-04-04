@@ -33,6 +33,9 @@ You may need to edit the paths referencing `node_modules` to resemble your own p
 ## Helpers
 OrionJS provides you with helper functions which help you achieve common tasks. Please refer to a helper's source code for full documentation.
 
+### breakpoints
+A set of breakpoint detection functions which let you measure window width.
+
 ### closestParent
 Recursively finds the closest parent element which has the specified class.
 

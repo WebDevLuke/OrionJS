@@ -9,5 +9,3 @@ Test our JS gulp build task
 // COMPONENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-require("../actions/data-class.js");
-require("../actions/data-toggle-text.js");
