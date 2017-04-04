@@ -37,7 +37,7 @@ OrionJS provides you with helper functions which help you achieve common tasks. 
 A set of breakpoint detection functions which let you measure window width.
 
 ### closestParent
-Recursively finds the closest parent element which has the specified class.
+Recursively finds the closest parent element which matches the given class or element type.
 
 ### fireEvent
 Manually fires the given event for the given element.
