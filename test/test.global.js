@@ -10,3 +10,5 @@ Test our JS gulp build task
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 //var closestParent = require("../helpers/closestParent.js");
+
+require("../actions/data-scroll.js");
