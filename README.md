@@ -56,6 +56,9 @@ Please refer to an actions's source code for full documentation.
 ### data-class
 data-class adds functionality for any components with `data-class` and `data-class-element` attributes. It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
 
+### data-scroll
+data-scroll adds functionality for any elements with a `data-scroll` attribute. It provides smooth scroll functionality to either an element or a relative point.
+
 ### data-toggle-text
 data-toggle-text adds functionality for any components with a `data-toggle-text` attribute. It allows you to toggle text content of an element on click and/or swipe events.
 

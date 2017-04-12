@@ -32,6 +32,7 @@ gulp.task('build', function() {
 // WATCH FUNCTION
 gulp.task("watch", function() {
 	// JS
-	gulp.watch('components/*.js', ['build']);
+	gulp.watch('actions/*.js', ['build']);
 	gulp.watch('helpers/*.js', ['build']);
+	gulp.watch('vendor/*.js', ['build']);
 });
