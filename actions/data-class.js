@@ -18,6 +18,11 @@ data-class (Required)
 
 data-class-element (Required)
 - A comma seperated list of elements data-class will target.
+- You can also pass a selection of keywords to trigger special behaviour. These are:
+	- "parent" - Selects the first parent of your trigger element
+	- "child" - Selects the first child of your trigger element
+	- "nextSibling" - Selects the first sibling of your trigger element
+	- "previousSibling" - Selects the first previous sibling of your trigger element
 
 data-class-behaviour (Optional)
 - The behaviour which occurs when triggered. You have 3 choices:-
@@ -34,6 +39,10 @@ data-class-swipe (Optional)
 - You can also specify if or not the swipe event should replace the click event, or if both should coexist. To do this add a comma then either true or false after your direction.
 	- "true": Swipe event replaces click event
 	- "false": Swipe event and click event are both added
+
+data-class-scope (Optional)
+- A comma seperated list of classes which limit the scope of the action. For example, if data-class is "is-active", data-class-element "js-myclass" and data-class-scope is "js-mycontainer", only the instances of "js-myclass" within "js-mycontainer" will have "is-active" added.
+- If data-class scope is not detected or "false" is passed, the scope is document-level.
 */
 
 
@@ -41,17 +50,22 @@ data-class-swipe (Optional)
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
+<div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, parent, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false" data-scope="false, false, js-container">
 
 In the above example, when our element is either clicked or a left swipe is detected the following happens:-
-	1) is-active class is toggled on js-elem
-	2) is-invalid class is removed from js-elem2
-	3) is-hidden class is added to js-elem3 
+	1) is-active class is toggled on any js-elem class
+	2) is-invalid class is removed from the trigger elements first parent
+	3) is-hidden class is added to any js-elem3 class contained within js-container class
 */ 
 
 
 // CODE
 //--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+- ADD KEYWORDS
+- ADD SCOPE
+*/
 
 
 (function(){
@@ -73,16 +87,17 @@ In the above example, when our element is either clicked or a left swipe is dete
 	elemRef,
 	a,
 	b,
+	c,
 	processChange = function(elem){
-		// Grab data-class data and convert to array
+		// Grab data-class list and convert to array
 		dataClass = elem.getAttribute("data-class");
 		dataClass = dataClass.split(", ");
 
-		// Grab data-class-element data
+		// Grab data-class-element list and convert to array
 		dataClassElement = elem.getAttribute("data-class-element");
 		dataClassElement = dataClassElement.split(", ");
 
-		// Grab data-class-behaviour if present
+		// Grab data-class-behaviour list if present and convert to array
 		if(elem.getAttribute("data-class-behaviour")) {
 			dataClassBehaviour = elem.getAttribute("data-class-behaviour");
 			dataClassBehaviour = dataClassBehaviour.split(", ");
@@ -90,8 +105,8 @@ In the above example, when our element is either clicked or a left swipe is dete
 
 		// Loop through all our dataClassElement items
 		for(b = 0; b < dataClassElement.length; b++) {
-			// Grab elem reference
-			elemRef = document.querySelector("." + dataClassElement[b]);
+			// Grab elem references
+			elemRef = document.querySelectorAll("." + dataClassElement[b]);
 			// Grab class we will add
 			elemClass = dataClass[b];
 			// Grab behaviour if any exists
@@ -99,18 +114,20 @@ In the above example, when our element is either clicked or a left swipe is dete
 				elemBehaviour = dataClassBehaviour[b];
 			}
 			// Do
-			if(elemBehaviour === "add") {
-				if(!elemRef.classList.contains(elemClass)) {
-					elemRef.classList.add(elemClass);
+			for(c = 0; c < elemRef.length; c++) {
+				if(elemBehaviour === "add") {
+					if(!elemRef[c].classList.contains(elemClass)) {
+						elemRef[c].classList.add(elemClass);
+					}
 				}
-			}
-			else if(elemBehaviour === "remove") {
-				if(elemRef.classList.contains(elemClass)) {
-					elemRef.classList.remove(elemClass);
+				else if(elemBehaviour === "remove") {
+					if(elemRef[c].classList.contains(elemClass)) {
+						elemRef[c].classList.remove(elemClass);
+					}
 				}
-			}
-			else {
-				elemRef.classList.toggle(elemClass);
+				else {
+					elemRef[c].classList.toggle(elemClass);
+				}
 			}
 		}
 	};
@@ -121,6 +138,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 		for(a = 0; a < elems.length; a++){
 			// Detect data-swipe attribute
 			if(elems[a].getAttribute("data-class-swipe")){
+				// Grab swipe specific data     
 				elemSwipe = elems[a].getAttribute("data-class-swipe");
 				elemSwipe = elemSwipe.split(", ");
 				direction = elemSwipe[0];
