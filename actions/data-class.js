@@ -37,7 +37,7 @@ data-class-swipe (Optional)
 
 data-class-scope (Optional)
 - A comma seperated list of parent classes relative to data-class-element to encapsulate the scope of the action. For example, if data-class is "is-active", data-class-element "js-myclass" and data-class-scope is "js-mycontainer", only the instances of "js-myclass" within that instance of "js-mycontainer" will have "is-active" added.
-- If data-class scope is not detected or "false" is passed, the scope is document-level.
+- If data-class-scope is not detected or "false" is passed, the scope is document-level.
 */
 
 
@@ -57,11 +57,6 @@ In the above example, when our element is either clicked or a left swipe is dete
 // CODE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-/*
-- ADD SCOPE, use CLOSESTPARENT to grab parent then querySelector. Also check if elem === this
-*/
-
-
 (function(){
 
 	// Import swipe helper
@@ -70,60 +65,53 @@ In the above example, when our element is either clicked or a left swipe is dete
 	closestParent = require("../helpers/closestParent.js"),
 	// Grab all elements with required data-attributes
 	elems = document.querySelectorAll("[data-class][data-class-element]"),
-	dataClass, 
-	dataClassElement,
-	dataClassBehaviour,
-	dataClassScope,
-	elem,
-	elemClass,
-	elemBehaviour,
-	elemSwipe,
-	elemSwipeBool,
-	direction,
-	currentElem,
-	elemRef,
-	a,
-	b,
-	c,
 	processChange = function(elem){
 		// Grab data-class list and convert to array
-		dataClass = elem.getAttribute("data-class");
+		var dataClass = elem.getAttribute("data-class");
 		dataClass = dataClass.split(", ");
 
 		// Grab data-class-element list and convert to array
-		dataClassElement = elem.getAttribute("data-class-element");
+		var dataClassElement = elem.getAttribute("data-class-element");
 		dataClassElement = dataClassElement.split(", ");
 
 		// Grab data-class-behaviour list if present and convert to array
 		if(elem.getAttribute("data-class-behaviour")) {
-			dataClassBehaviour = elem.getAttribute("data-class-behaviour");
+			var dataClassBehaviour = elem.getAttribute("data-class-behaviour");
 			dataClassBehaviour = dataClassBehaviour.split(", ");
 		}
 
 		// Grab data-scope list if present and convert to array
 		if(elem.getAttribute("data-class-scope")) {
-			dataClassScope = elem.getAttribute("data-class-scope");
+			var dataClassScope = elem.getAttribute("data-class-scope");
 			dataClassScope = dataClassScope.split(", ");
 		}
 
 		// Loop through all our dataClassElement items
-		for(b = 0; b < dataClassElement.length; b++) {
+		for(var b = 0; b < dataClassElement.length; b++) {
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
-				elemRef = closestParent(elem, dataClassScope[b]);
-				elemRef = elemRef.querySelectorAll("." + dataClassElement[b]);
+				// Check if trigger, target elem and scope match so we can return self
+				if(elem.classList.contains(dataClassScope[b]) && dataClassElement[b] === dataClassScope[b]) {
+					var elemRef = []
+					elemRef[0] = elem;
+				}
+				// Otherwise find matching parent
+				else {
+					var elemRef = closestParent(elem, dataClassScope[b]);
+					elemRef = elemRef.querySelectorAll("." + dataClassElement[b]);
+				}
 			}
 			else {
-				elemRef = document.querySelectorAll("." + dataClassElement[b]);
+				var elemRef = document.querySelectorAll("." + dataClassElement[b]);
 			}
 			// Grab class we will add
-			elemClass = dataClass[b];
+			var elemClass = dataClass[b];
 			// Grab behaviour if any exists
 			if(dataClassBehaviour) {
-				elemBehaviour = dataClassBehaviour[b];
+				var elemBehaviour = dataClassBehaviour[b];
 			}
 			// Do
-			for(c = 0; c < elemRef.length; c++) {
+			for(var c = 0; c < elemRef.length; c++) {
 				if(elemBehaviour === "add") {
 					if(!elemRef[c].classList.contains(elemClass)) {
 						elemRef[c].classList.add(elemClass);
@@ -144,14 +132,14 @@ In the above example, when our element is either clicked or a left swipe is dete
 	// Only go ahead if we've found any matches
 	if (elems.length) {
 		// Loop through our matches and add click events
-		for(a = 0; a < elems.length; a++){
+		for(var a = 0; a < elems.length; a++){
 			// Detect data-swipe attribute
 			if(elems[a].getAttribute("data-class-swipe")){
 				// Grab swipe specific data     
-				elemSwipe = elems[a].getAttribute("data-class-swipe");
-				elemSwipe = elemSwipe.split(", ");
-				direction = elemSwipe[0];
-				elemSwipeBool = elemSwipe[1];
+				var elemSwipe = elems[a].getAttribute("data-class-swipe"),
+				elemSwipe = elemSwipe.split(", "),
+				direction = elemSwipe[0],
+				elemSwipeBool = elemSwipe[1],
 				currentElem = elems[a];
 
 				if(elemSwipeBool === "false" || !elemSwipeBool) {
