@@ -18,11 +18,11 @@
 </head>
 <body>
 
-<div class="js-ha">
-	<div class="js-parent" data-class="is-active" data-class-element="js-parent" data-class-scope="js-ha">Trigger</div>
-	<div class="js-parent" data-class="is-active" data-class-element="js-parent">Trigger 2</div>
+<div class="js-parent">
+	<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-parent">Trigger 1</div>
+	<div class="js-elem" data-class="is-active, is-invalid" data-class-element="js-elem, js-elem" data-class-scope="false, js-parent">Trigger 2</div>
 </div>
-<div class="js-parent" data-class="is-active" data-class-element="js-parent">Trigger 3</div>
+<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-elem">Trigger 3</div>
 
 <script src="test.global-compiled.js"></script>
 </body>

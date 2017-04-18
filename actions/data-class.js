@@ -36,21 +36,38 @@ data-class-swipe (Optional)
 	- "false": Swipe event and click event are both added (Default)
 
 data-class-scope (Optional)
-- A comma seperated list of parent classes relative to data-class-element to encapsulate the scope of the action. For example, if data-class is "is-active", data-class-element "js-myclass" and data-class-scope is "js-mycontainer", only the instances of "js-myclass" within that instance of "js-mycontainer" will have "is-active" added.
+- A comma seperated list of classes relative to the trigger element which encapsulates the scope of the action.
 - If data-class-scope is not detected or "false" is passed, the scope is document-level.
 */
 
 
-// EXAMPLE
+// BASIC EXAMPLE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false" data-class-scope="false, false, js-container">
+<div data-class="is-active, is-invalid, is-hidden" data-class-element="js-elem, js-elem2, js-elem3" data-class-behaviour="toggle, remove, add" data-class-swipe="left, false">
 
-In the above example, when our element is either clicked or a left swipe is detected the following happens:-
-	1) is-active class is toggled on any js-elem class
-	2) is-invalid class is removed from any js-elem2
-	3) is-hidden class is added to any js-elem3 class contained within js-container parent class relative to the trigger element
+In the above example, when our element is either clicked or a left swipe is detected the following happens:
+1) is-active class is toggled on any js-elem class
+2) is-invalid class is removed from any js-elem2 class
+3) is-hidden class is added to any js-elem3 class
+*/ 
+
+
+// DATA-CLASS-SCOPE EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<div class="js-parent">
+	<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-parent">Trigger 1</div>
+	<div class="js-elem" data-class="is-active, is-invalid" data-class-element="js-elem, js-elem" data-class-scope="false, js-parent">Trigger 2</div>
+</div>
+<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-elem">Trigger 3</div>
+
+
+1) When "Trigger 1" is clicked, all instances of "js-elem" within "js-parent" will have "is-active" toggled.
+2) When "Trigger 2" is clicked, as the first scope is set to "false", all instances of "js-elem" everywhere will have "is-active" toggled. In addition, all instances of "js-elem" within "js-parent" will have "is-invalid" toggled.
+3) When "Trigger 3" is clicked, as it has itself defined as scope, it will toggle "is-active" on itself.
 */ 
 
 
