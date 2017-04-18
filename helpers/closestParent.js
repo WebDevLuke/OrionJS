@@ -17,10 +17,10 @@ var closestParent = require("../helpers/closestParent.js");
 // Grab element
 var myElem = document.querySelector(".my-elem");
 
-// Grab closest parent by classname
-var parent = closestParent(myElem, ".my-parent");
+// Grab closest matching parent by classname
+var parent = closestParent(myElem, "my-parent");
 
-// Grab closest parent by element
+// Grab closest matching parent by element
 var parent = closestParent(myElem, "form");
 */
 
