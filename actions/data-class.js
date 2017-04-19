@@ -67,7 +67,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 
 1) When "Trigger 1" is clicked, all instances of "js-elem" within "js-parent" will have "is-active" toggled.
 2) When "Trigger 2" is clicked, as the first scope is set to "false", all instances of "js-elem" everywhere will have "is-active" toggled. In addition, all instances of "js-elem" within "js-parent" will have "is-invalid" toggled.
-3) When "Trigger 3" is clicked, as it has itself defined as scope, it will toggle "is-active" on itself.
+3) When "Trigger 3" is clicked, as it has itself defined as scope, it will toggle "is-active" on itself only.
 */ 
 
 
@@ -107,15 +107,23 @@ In the above example, when our element is either clicked or a left swipe is dete
 		for(var b = 0; b < dataClassElement.length; b++) {
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
-				// Check if trigger, target elem and scope match so we can return self
-				if(elem.classList.contains(dataClassScope[b]) && dataClassElement[b] === dataClassScope[b]) {
-					var elemRef = []
-					elemRef[0] = elem;
+				var elemParent = closestParent(elem, dataClassScope[b]),
+				elemParentArray = [];
+
+				// Grab all matching child elements of matching parent
+				var elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
+
+				// Convert to array
+				elemRef = Array.prototype.slice.call(elemRef);
+
+				// Add parent if it matches the data-class-element and fits within scope
+				if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
+					elemParentArray[0] = elemParent;
 				}
-				// Otherwise find matching parent
-				else {
-					var elemRef = closestParent(elem, dataClassScope[b]);
-					elemRef = elemRef.querySelectorAll("." + dataClassElement[b]);
+
+				// Add parent array if existing
+				if(elemParentArray) {
+					elemRef = elemRef.concat(elemParentArray);
 				}
 			}
 			else {
