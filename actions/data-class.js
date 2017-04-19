@@ -61,13 +61,18 @@ In the above example, when our element is either clicked or a left swipe is dete
 <div class="js-parent">
 	<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-parent">Trigger 1</div>
 	<div class="js-elem" data-class="is-active, is-invalid" data-class-element="js-elem, js-elem" data-class-scope="false, js-parent">Trigger 2</div>
+	<div class="js-elem" data-class="is-active" data-class-element="js-parent" data-class-scope="js-parent">
+		Trigger 3
+		<div class="js-parent"></div>
+	</div>
 </div>
-<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-elem">Trigger 3</div>
+<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-elem">Trigger 4</div>
 
 
 1) When "Trigger 1" is clicked, all instances of "js-elem" within "js-parent" will have "is-active" toggled.
 2) When "Trigger 2" is clicked, as the first scope is set to "false", all instances of "js-elem" everywhere will have "is-active" toggled. In addition, all instances of "js-elem" within "js-parent" will have "is-invalid" toggled.
-3) When "Trigger 3" is clicked, as it has itself defined as scope, it will toggle "is-active" on itself only.
+3) When "Trigger 3" is clicked, "is-active" will be added to all instances of "js-parent" within and including the first parent instance of "js-parent" relative to the trigger element.
+4) When "Trigger 4" is clicked, as it has itself defined as scope, it will toggle "is-active" on itself only.
 */ 
 
 
