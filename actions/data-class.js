@@ -112,9 +112,10 @@ In the above example, when our element is either clicked or a left swipe is dete
 		for(var b = 0; b < dataClassElement.length; b++) {
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
+				// Grab parent
 				var elemParent = closestParent(elem, dataClassScope[b]),
 
-				// Grab all matching child elements of matching parent
+				// Grab all matching child elements of parent
 				elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
 
 				// Convert to array
