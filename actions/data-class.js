@@ -113,22 +113,16 @@ In the above example, when our element is either clicked or a left swipe is dete
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
 				var elemParent = closestParent(elem, dataClassScope[b]),
-				elemParentArray = [];
 
 				// Grab all matching child elements of matching parent
-				var elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
+				elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
 
 				// Convert to array
 				elemRef = Array.prototype.slice.call(elemRef);
 
 				// Add parent if it matches the data-class-element and fits within scope
 				if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
-					elemParentArray[0] = elemParent;
-				}
-
-				// Add parent array if existing
-				if(elemParentArray) {
-					elemRef = elemRef.concat(elemParentArray);
+					elemRef.unshift(elemParent);
 				}
 			}
 			else {
