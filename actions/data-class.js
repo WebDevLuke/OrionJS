@@ -15,16 +15,23 @@ It allows you to quickly add, remove or toggle classes on elements on click and/
 /*
 data-class (Required)
 - A comma seperated list of classes you wish to add.
+- If a class is missed, the last valid class will be used. This allows you to have one class for many actions.
 
 data-class-element (Optional)
 - A comma seperated list of elements data-class will target.
-- If data-class-element isn't present, "this" will be passed
+- If data-class-element isn't present, it and also data-class-scope will be set as trigger element, essentially replicating "this"
 
 data-class-behaviour (Optional)
 - The behaviour which occurs when triggered. You have 3 choices:-
 	- "toggle": This adds the class if it's not already present or removes if it is (Default)
 	- "add": This adds the class if it's not present 
 	- "remove": This removes the class if it's present
+- If a behaviour is missed, the last valid behaviour will be used. This allows you to have one behaviour for many actions.
+
+data-class-scope (Optional)
+- A comma seperated list of classes relative to the trigger element which encapsulates the scope of the action.
+- If data-class-scope is not detected or "false" is passed, the scope is document-level.
+- If a scope is missed, the last valid scope will be used. This allows you to have one scope for many actions.
 
 data-class-swipe (Optional)
 - If defined, the specified swipe direction triggers class functionality. You have 4 choices for directions:-
@@ -35,14 +42,30 @@ data-class-swipe (Optional)
 - You can also specify if or not the swipe event should replace the click event, or if both should coexist. To do this add a comma then either true or false after your direction.
 	- "true": Swipe event replaces click event
 	- "false": Swipe event and click event are both added (Default)
+*/
 
-data-class-scope (Optional)
-- A comma seperated list of classes relative to the trigger element which encapsulates the scope of the action.
-- If data-class-scope is not detected or "false" is passed, the scope is document-level.
+// EXAMPLE 1
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<div class="js-elem" data-class="is-active">
+
+In the above example, when our element is clicked the following happens:
+1) is-active class is toggled the element
+*/
+
+// EXAMPLE 2
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<div data-class-element="js-elem, js-elem2, js-elem3" data-class="is-active" data-class-behaviour="add">
+
+In the above example, when our element is clicked the following happens:
+1) is-active class is added to js-elem, js-elem2 and js-elem3
 */
 
 
-// BASIC EXAMPLE
+// EXAMPLE 3
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -55,7 +78,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 */ 
 
 
-// DATA-CLASS-SCOPE EXAMPLE
+// EXAMPLE 4
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -67,13 +90,13 @@ In the above example, when our element is either clicked or a left swipe is dete
 		<div class="js-parent"></div>
 	</div>
 </div>
-<div class="js-elem" data-class="is-active" data-class-element="js-elem" data-class-scope="js-elem">Trigger 4</div>
+<div class="js-elem" data-class="is-active">Trigger 4</div>
 
 
 1) When "Trigger 1" is clicked, all instances of "js-elem" within "js-parent" will have "is-active" toggled.
 2) When "Trigger 2" is clicked, as the first scope is set to "false", all instances of "js-elem" everywhere will have "is-active" toggled. In addition, all instances of "js-elem" within "js-parent" will have "is-invalid" toggled.
 3) When "Trigger 3" is clicked, "is-active" will be added to all instances of "js-parent" within and including the first parent instance of "js-parent" relative to the trigger element.
-4) When "Trigger 4" is clicked, as it has itself defined as scope, it will toggle "is-active" on itself only.
+4) When "Trigger 4" is clicked, it will toggle "is-active" on itself only.
 */ 
 
 
@@ -89,19 +112,10 @@ In the above example, when our element is either clicked or a left swipe is dete
 	// Grab all elements with required data-attributes
 	elems = document.querySelectorAll("[data-class]"),
 	processChange = function(elem){
+
 		// Grab data-class list and convert to array
 		var dataClass = elem.getAttribute("data-class");
 		dataClass = dataClass.split(", ");
-
-		// Grab data-class-element list and convert to array
-		if(elem.getAttribute("data-class-element")) {
-			var dataClassElement = elem.getAttribute("data-class-element");
-			dataClassElement = dataClassElement.split(", ");
-		}
-		else {
-			var dataClassElement = [];
-			dataClassElement.push(elem.classList[0]);
-		}
 
 		// Grab data-class-behaviour list if present and convert to array
 		if(elem.getAttribute("data-class-behaviour")) {
@@ -115,15 +129,32 @@ In the above example, when our element is either clicked or a left swipe is dete
 			dataClassScope = dataClassScope.split(", ");
 		}
 
+		// Grab data-class-element list and convert to array
+		// If data-class-element isn't found, pass self, set scope to self, essentially replicating "this"
+		if(elem.getAttribute("data-class-element")) {
+			var dataClassElement = elem.getAttribute("data-class-element");
+			dataClassElement = dataClassElement.split(", ");
+		}
+		else {
+			var dataClassElement = [];
+			dataClassElement.push(elem.classList[0]);
+			dataClassScope = dataClassElement;
+		}
+
 		// Loop through all our dataClassElement items
 		for(var b = 0; b < dataClassElement.length; b++) {
+
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
+
 				// Grab parent
-				var elemParent = closestParent(elem, dataClassScope[b]),
+				// If one isn't found, keep last valid one
+				if(dataClassScope[b] !== undefined) {
+					var elemParent = closestParent(elem, dataClassScope[b]);
+				}
 
 				// Grab all matching child elements of parent
-				elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
+				var elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
 
 				// Convert to array
 				elemRef = Array.prototype.slice.call(elemRef);
@@ -137,10 +168,16 @@ In the above example, when our element is either clicked or a left swipe is dete
 				var elemRef = document.querySelectorAll("." + dataClassElement[b]);
 			}
 			// Grab class we will add
-			var elemClass = dataClass[b];
+			// If one isn't found, keep last valid one
+			if(dataClass[b] !== undefined) {
+				var elemClass = dataClass[b];
+			}		
 			// Grab behaviour if any exists
+			// If one isn't found, keep last valid one
 			if(dataClassBehaviour) {
-				var elemBehaviour = dataClassBehaviour[b];
+				if(dataClassBehaviour[b] !== undefined) {
+					var elemBehaviour = dataClassBehaviour[b];
+				}
 			}
 			// Do
 			for(var c = 0; c < elemRef.length; c++) {
@@ -158,7 +195,9 @@ In the above example, when our element is either clicked or a left swipe is dete
 					elemRef[c].classList.toggle(elemClass);
 				}
 			}
+
 		}
+
 	};
 
 	// Only go ahead if we've found any matches
