@@ -3,7 +3,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-DATA-CLASS adds functionality for any elements with data-class and data-class-element attributes.
+DATA-CLASS adds functionality for any elements with data-class attribute.
 
 It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
 */
@@ -16,8 +16,9 @@ It allows you to quickly add, remove or toggle classes on elements on click and/
 data-class (Required)
 - A comma seperated list of classes you wish to add.
 
-data-class-element (Required)
+data-class-element (Optional)
 - A comma seperated list of elements data-class will target.
+- If data-class-element isn't present, "this" will be passed
 
 data-class-behaviour (Optional)
 - The behaviour which occurs when triggered. You have 3 choices:-
@@ -86,15 +87,21 @@ In the above example, when our element is either clicked or a left swipe is dete
 	// Import closestParent helper
 	closestParent = require("../helpers/closestParent.js"),
 	// Grab all elements with required data-attributes
-	elems = document.querySelectorAll("[data-class][data-class-element]"),
+	elems = document.querySelectorAll("[data-class]"),
 	processChange = function(elem){
 		// Grab data-class list and convert to array
 		var dataClass = elem.getAttribute("data-class");
 		dataClass = dataClass.split(", ");
 
 		// Grab data-class-element list and convert to array
-		var dataClassElement = elem.getAttribute("data-class-element");
-		dataClassElement = dataClassElement.split(", ");
+		if(elem.getAttribute("data-class-element")) {
+			var dataClassElement = elem.getAttribute("data-class-element");
+			dataClassElement = dataClassElement.split(", ");
+		}
+		else {
+			var dataClassElement = [];
+			dataClassElement.push(elem.classList[0]);
+		}
 
 		// Grab data-class-behaviour list if present and convert to array
 		if(elem.getAttribute("data-class-behaviour")) {

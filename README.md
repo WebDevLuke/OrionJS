@@ -23,7 +23,7 @@ Then you can import modules and/or helpers using the commonJS pattern:-
 var getIndex = require("node_modules/orionjs/helpers/getIndex.js");
 
 // Import data-class module
-require("node_modules/orionjs/modules/data-class.js");
+require("node_modules/orionjs/actions/data-class.js");
 ```
 
 Or you can copy `node_modules/orionjs/sample.main.js` and use that as a starting point.
