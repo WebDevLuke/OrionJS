@@ -160,7 +160,8 @@ In the above example, when our element is either clicked or a left swipe is dete
 				elemRef = Array.prototype.slice.call(elemRef);
 
 				// Add parent if it matches the data-class-element and fits within scope
-				if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
+				//if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
+				if(elemParent.classList.contains(dataClassElement[b])) {
 					elemRef.unshift(elemParent);
 				}
 			}
