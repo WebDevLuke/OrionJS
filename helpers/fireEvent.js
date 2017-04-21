@@ -20,9 +20,7 @@ var myElem = document.querySelector(".my-elem");
 
 // Fire custom event with custom data object
 fireEvent(myElem, "signup", {
-	detail: {
-		username: "lukeharrison"
-	}
+	username: "lukeharrison"
 });
 */
 
@@ -36,7 +34,7 @@ require("../vendor/modernizr.js");
 module.exports = function(elem, event, details) {
 	if(Modernizr.customevent) {
 		// Declare event
-		var myEvent = new CustomEvent(event, details);
+		var myEvent = new CustomEvent(event, {"bubbles":true, "cancelable":false,"detail":details});
 		// Trigger it!
 		elem.dispatchEvent(myEvent);
 	}
