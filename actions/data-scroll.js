@@ -49,32 +49,30 @@ require('smoothscroll-polyfill').polyfill();
 	var elems = document.querySelectorAll("[data-scroll]"),
 	attrValue;
 
-	if(elems.length){
-		// Add event listeners to each one 
-		for(var a = 0; a < elems.length; a++){
-			elems[a].addEventListener("click", function(e){
-				// Prevent default behavior
-				e.preventDefault();
-				// Check if we have an element or a number and act accordingly
-				if(!parseInt(this.getAttribute("data-scroll"))) {
-					// Grab linked element
-					attrValue = document.querySelector("." + this.getAttribute("data-scroll"));
-					// Initate scroll into view
-					attrValue.scrollIntoView({ 
-						behavior: 'smooth',
-						block: 'end'
-					});
-				}
-				else {
-					attrValue = this.getAttribute("data-scroll");
-					window.scrollBy({
-						top: attrValue,
-						left: 0,
-						behavior: 'smooth'
-					});
-				}
-			});
-		}
+	// Add event listeners to each one 
+	for(var a = 0; a < elems.length; a++){
+		elems[a].addEventListener("click", function(e){
+			// Prevent default behavior
+			e.preventDefault();
+			// Check if we have an element or a number and act accordingly
+			if(!parseInt(this.getAttribute("data-scroll"))) {
+				// Grab linked element
+				attrValue = document.querySelector("." + this.getAttribute("data-scroll"));
+				// Initate scroll into view
+				attrValue.scrollIntoView({ 
+					behavior: 'smooth',
+					block: 'end'
+				});
+			}
+			else {
+				attrValue = this.getAttribute("data-scroll");
+				window.scrollBy({
+					top: attrValue,
+					left: 0,
+					behavior: 'smooth'
+				});
+			}
+		});
 	}
 
 })();

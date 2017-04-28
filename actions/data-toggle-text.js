@@ -68,37 +68,20 @@ it swaps back.
 		}
 	};
 
-	if(elems.length){
-		// Add event listeners to each one 
-		for(var a = 0; a < elems.length; a++){
-			// Cache original value
-			elems[a].setAttribute("data-toggle-text-original", elems[a].innerText);
+	// Add event listeners to each one 
+	for(var a = 0; a < elems.length; a++){
+		// Cache original value
+		elems[a].setAttribute("data-toggle-text-original", elems[a].innerText);
 
-			// Detect data-swipe attribute
-			if(elems[a].getAttribute("data-toggle-text-swipe")){
-				var elemSwipe = elems[a].getAttribute("data-toggle-text-swipe"),
-				elemSwipe = elemSwipe.split(", "),
-				direction = elemSwipe[0],
-				elemSwipeBool = elemSwipe[1],
-				currentElem = elems[a];
+		// Detect data-swipe attribute
+		if(elems[a].getAttribute("data-toggle-text-swipe")){
+			var elemSwipe = elems[a].getAttribute("data-toggle-text-swipe"),
+			elemSwipe = elemSwipe.split(", "),
+			direction = elemSwipe[0],
+			elemSwipeBool = elemSwipe[1],
+			currentElem = elems[a];
 
-				if(elemSwipeBool === "false") {
-					// Assign click event
-					elems[a].addEventListener("click", function(e){
-						// Prevent default action of element
-						e.preventDefault();	
-						// Run change function
-						processChange(this);
-					});
-				}
-				swipeDetect(elems[a], function(swipedir){
-					if(swipedir === direction) {
-						// Run change function
-						processChange(currentElem);
-					}
-				})
-			}
-			else {
+			if(elemSwipeBool === "false") {
 				// Assign click event
 				elems[a].addEventListener("click", function(e){
 					// Prevent default action of element
@@ -107,6 +90,21 @@ it swaps back.
 					processChange(this);
 				});
 			}
+			swipeDetect(elems[a], function(swipedir){
+				if(swipedir === direction) {
+					// Run change function
+					processChange(currentElem);
+				}
+			})
+		}
+		else {
+			// Assign click event
+			elems[a].addEventListener("click", function(e){
+				// Prevent default action of element
+				e.preventDefault();	
+				// Run change function
+				processChange(this);
+			});
 		}
 	}
 

@@ -201,36 +201,18 @@ In the above example, when our element is either clicked or a left swipe is dete
 
 	};
 
-	// Only go ahead if we've found any matches
-	if (elems.length) {
-		// Loop through our matches and add click events
-		for(var a = 0; a < elems.length; a++){
-			// Detect data-swipe attribute
-			if(elems[a].getAttribute("data-class-swipe")){
-				// Grab swipe specific data     
-				var elemSwipe = elems[a].getAttribute("data-class-swipe"),
-				elemSwipe = elemSwipe.split(", "),
-				direction = elemSwipe[0],
-				elemSwipeBool = elemSwipe[1],
-				currentElem = elems[a];
+	// Loop through our matches and add click events
+	for(var a = 0; a < elems.length; a++){
+		// Detect data-swipe attribute
+		if(elems[a].getAttribute("data-class-swipe")){
+			// Grab swipe specific data     
+			var elemSwipe = elems[a].getAttribute("data-class-swipe"),
+			elemSwipe = elemSwipe.split(", "),
+			direction = elemSwipe[0],
+			elemSwipeBool = elemSwipe[1],
+			currentElem = elems[a];
 
-				if(elemSwipeBool === "false" || !elemSwipeBool) {
-					// Assign click event
-					elems[a].addEventListener("click", function(e){
-						// Prevent default action of element
-						e.preventDefault();	
-						// Run class function
-						processChange(this);
-					});
-				}
-				swipeDetect(elems[a], function(swipedir){
-					if(swipedir === direction) {
-						// Run class function
-						processChange(currentElem);
-					}
-				})
-			}
-			else {
+			if(elemSwipeBool === "false" || !elemSwipeBool) {
 				// Assign click event
 				elems[a].addEventListener("click", function(e){
 					// Prevent default action of element
@@ -239,6 +221,22 @@ In the above example, when our element is either clicked or a left swipe is dete
 					processChange(this);
 				});
 			}
+			swipeDetect(elems[a], function(swipedir){
+				if(swipedir === direction) {
+					// Run class function
+					processChange(currentElem);
+				}
+			})
+		}
+		else {
+			// Assign click event
+			elems[a].addEventListener("click", function(e){
+				// Prevent default action of element
+				e.preventDefault();	
+				// Run class function
+				processChange(this);
+			});
 		}
 	}
+
 })();
