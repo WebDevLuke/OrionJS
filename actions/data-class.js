@@ -6,6 +6,9 @@
 DATA-CLASS adds functionality for any elements with data-class attribute.
 
 It allows you to quickly add, remove or toggle classes on elements on click and/or swipe events.
+
+If adding elements to the DOM after initial render, fire a "dataClass" event on document.body to trigger
+the data-class logic assignment. Otherwise when your new data-class element is clicked, nothing will happen!
 */
 
 
