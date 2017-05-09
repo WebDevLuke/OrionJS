@@ -109,8 +109,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 	var swipeDetect = require("../helpers/swipeDetect.js"),
 	// Import closestParent helper
 	closestParent = require("../helpers/closestParent.js"),
-	// Grab all elements with required data-attributes
-	elems = document.querySelectorAll("[data-class]"),
+	// Change function
 	processChange = function(elem){
 
 		// Grab data-class list and convert to array
@@ -199,44 +198,72 @@ In the above example, when our element is either clicked or a left swipe is dete
 
 		}
 
+	},
+	// Init function
+	initDataClass = function(){
+		// Grab all elements with required data-attributes
+		var elems = document.querySelectorAll("[data-class]");
+
+		// Loop through our matches and add click events
+		for(var a = 0; a < elems.length; a++){
+
+			// Add class-registered attribute if not present and set to false
+			if(!elems[a].getAttribute("data-class-registered")){
+				elems[a].setAttribute("data-class-registered", "false"); 
+			}
+
+			// Only preceed further if our current node has a FALSE data-class-registered
+			// This stops us from reassigning event listeners which already exist
+			if(elems[a].getAttribute("data-class-registered") === "false"){
+				// Record assignment
+				elems[a].setAttribute("data-class-registered", "true"); 
+				// Detect data-swipe attribute
+				if(elems[a].getAttribute("data-class-swipe")){
+					// Grab swipe specific data     
+					var elemSwipe = elems[a].getAttribute("data-class-swipe"),
+					elemSwipe = elemSwipe.split(", "),
+					direction = elemSwipe[0],
+					elemSwipeBool = elemSwipe[1],
+					currentElem = elems[a];
+
+					if(elemSwipeBool === "false" || !elemSwipeBool) {
+						// Assign click event
+						elems[a].addEventListener("click", function(e){
+							// Prevent default action of element
+							e.preventDefault();	
+							// Run class function
+							processChange(this);
+						});
+					}
+					swipeDetect(elems[a], function(swipedir){
+						if(swipedir === direction) {
+							// Run class function
+							processChange(currentElem);
+						}
+					})
+				}
+				else {
+					// Assign click event
+					elems[a].addEventListener("click", function(e){
+						// Prevent default action of element
+						e.preventDefault();	
+						// Run class function
+						processChange(this);
+					});
+				}
+			}
+		}
 	};
 
-	// Loop through our matches and add click events
-	for(var a = 0; a < elems.length; a++){
-		// Detect data-swipe attribute
-		if(elems[a].getAttribute("data-class-swipe")){
-			// Grab swipe specific data     
-			var elemSwipe = elems[a].getAttribute("data-class-swipe"),
-			elemSwipe = elemSwipe.split(", "),
-			direction = elemSwipe[0],
-			elemSwipeBool = elemSwipe[1],
-			currentElem = elems[a];
+	// Run when DOM has finished loading
+	document.addEventListener("DOMContentLoaded", function() {
+		// Run first time
+		initDataClass();
+	});
 
-			if(elemSwipeBool === "false" || !elemSwipeBool) {
-				// Assign click event
-				elems[a].addEventListener("click", function(e){
-					// Prevent default action of element
-					e.preventDefault();	
-					// Run class function
-					processChange(this);
-				});
-			}
-			swipeDetect(elems[a], function(swipedir){
-				if(swipedir === direction) {
-					// Run class function
-					processChange(currentElem);
-				}
-			})
-		}
-		else {
-			// Assign click event
-			elems[a].addEventListener("click", function(e){
-				// Prevent default action of element
-				e.preventDefault();	
-				// Run class function
-				processChange(this);
-			});
-		}
-	}
+	// On dataClass custom event fire, look again for new data-class instances
+	document.body.addEventListener("dataClass", function() {
+		initDataClass();
+	});	
 
 })();
