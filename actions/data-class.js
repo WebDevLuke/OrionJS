@@ -162,7 +162,6 @@ In the above example, when our element is either clicked or a left swipe is dete
 				elemRef = Array.prototype.slice.call(elemRef);
 
 				// Add parent if it matches the data-class-element and fits within scope
-				//if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
 				if(elemParent.classList.contains(dataClassElement[b])) {
 					elemRef.unshift(elemParent);
 				}
@@ -185,14 +184,10 @@ In the above example, when our element is either clicked or a left swipe is dete
 			// Do
 			for(var c = 0; c < elemRef.length; c++) {
 				if(elemBehaviour === "add") {
-					if(!elemRef[c].classList.contains(elemClass)) {
-						elemRef[c].classList.add(elemClass);
-					}
+					elemRef[c].classList.add(elemClass);
 				}
 				else if(elemBehaviour === "remove") {
-					if(elemRef[c].classList.contains(elemClass)) {
-						elemRef[c].classList.remove(elemClass);
-					}
+					elemRef[c].classList.remove(elemClass);
 				}
 				else {
 					elemRef[c].classList.toggle(elemClass);
