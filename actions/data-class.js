@@ -132,7 +132,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 		}
 
 		// Grab data-class-element list and convert to array
-		// If data-class-element isn't found, pass self, set scope to self, essentially replicating "this"
+		// If data-class-element isn't found, pass self, set scope to self if none is present, essentially replicating "this"
 		if(elem.getAttribute("data-class-element")) {
 			var dataClassElement = elem.getAttribute("data-class-element");
 			dataClassElement = dataClassElement.split(", ");
@@ -140,11 +140,28 @@ In the above example, when our element is either clicked or a left swipe is dete
 		else {
 			var dataClassElement = [];
 			dataClassElement.push(elem.classList[0]);
-			dataClassScope = dataClassElement;
+			if(!dataClassScope) {
+				var dataClassScope = dataClassElement;
+			}
+			console.log(dataClassScope);
 		}
 
-		// Loop through all our dataClassElement items
-		for(var b = 0; b < dataClassElement.length; b++) {
+		// Find out which has the biggest length between classes and elements and use that length as loop number
+		// This is to make sure situations where we have one data-class-element value and many data-class values are correctly setup
+		if(dataClassElement.length >= dataClass.length) {
+			var dataLength = dataClassElement.length;
+		}
+		else {
+			var dataLength = dataClass.length;
+		}
+
+		// Loop through to assign out event listeners
+		for(var b = 0; b < dataLength; b++) {
+
+			// If a data-class-element value isn't found, use last valid one
+			if(dataClassElement[b] !== undefined) {
+				var dataClassElementValue = dataClassElement[b];
+			} 
 
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
@@ -156,18 +173,18 @@ In the above example, when our element is either clicked or a left swipe is dete
 				}
 
 				// Grab all matching child elements of parent
-				var elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
+				var elemRef = elemParent.querySelectorAll("." + dataClassElementValue);
 
 				// Convert to array
 				elemRef = Array.prototype.slice.call(elemRef);
 
 				// Add parent if it matches the data-class-element and fits within scope
-				if(elemParent.classList.contains(dataClassElement[b])) {
+				if(elemParent.classList.contains(dataClassElementValue)) {
 					elemRef.unshift(elemParent);
 				}
 			}
 			else {
-				var elemRef = document.querySelectorAll("." + dataClassElement[b]);
+				var elemRef = document.querySelectorAll("." + dataClassElementValue);
 			}
 			// Grab class we will add
 			// If one isn't found, keep last valid one
