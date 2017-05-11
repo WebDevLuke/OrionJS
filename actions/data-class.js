@@ -143,7 +143,6 @@ In the above example, when our element is either clicked or a left swipe is dete
 			if(!dataClassScope) {
 				var dataClassScope = dataClassElement;
 			}
-			console.log(dataClassScope);
 		}
 
 		// Find out which has the biggest length between classes and elements and use that length as loop number
@@ -215,70 +214,72 @@ In the above example, when our element is either clicked or a left swipe is dete
 
 	},
 	// Init function
-	initDataClass = function(){
-		// Grab all elements with required data-attributes
-		var elems = document.querySelectorAll("[data-class]");
+	initDataClass = function(elem){
+		// Detect data-swipe attribute
+		if(elem.getAttribute("data-class-swipe")){
+			// Grab swipe specific data     
+			var elemSwipe = elem.getAttribute("data-class-swipe"),
+			elemSwipe = elemSwipe.split(", "),
+			direction = elemSwipe[0],
+			elemSwipeBool = elemSwipe[1],
+			currentElem = elem;
 
-		// Loop through our matches and add click events
-		for(var a = 0; a < elems.length; a++){
-
-			// Add class-registered attribute if not present and set to false
-			if(!elems[a].getAttribute("data-class-registered")){
-				elems[a].setAttribute("data-class-registered", "false"); 
+			if(elemSwipeBool === "false" || !elemSwipeBool) {
+				// Assign click event
+				elem.addEventListener("click", function(e){
+					// Prevent default action of element
+					e.preventDefault();	
+					// Run class function
+					processChange(this);
+				});
 			}
-
-			// Only preceed further if our current node has a FALSE data-class-registered
-			// This stops us from reassigning event listeners which already exist
-			if(elems[a].getAttribute("data-class-registered") === "false"){
-				// Record assignment
-				elems[a].setAttribute("data-class-registered", "true"); 
-				// Detect data-swipe attribute
-				if(elems[a].getAttribute("data-class-swipe")){
-					// Grab swipe specific data     
-					var elemSwipe = elems[a].getAttribute("data-class-swipe"),
-					elemSwipe = elemSwipe.split(", "),
-					direction = elemSwipe[0],
-					elemSwipeBool = elemSwipe[1],
-					currentElem = elems[a];
-
-					if(elemSwipeBool === "false" || !elemSwipeBool) {
-						// Assign click event
-						elems[a].addEventListener("click", function(e){
-							// Prevent default action of element
-							e.preventDefault();	
-							// Run class function
-							processChange(this);
-						});
-					}
-					swipeDetect(elems[a], function(swipedir){
-						if(swipedir === direction) {
-							// Run class function
-							processChange(currentElem);
-						}
-					})
+			swipeDetect(elem, function(swipedir){
+				if(swipedir === direction) {
+					// Run class function
+					processChange(currentElem);
 				}
-				else {
-					// Assign click event
-					elems[a].addEventListener("click", function(e){
-						// Prevent default action of element
-						e.preventDefault();	
-						// Run class function
-						processChange(this);
-					});
-				}
-			}
+			})
+		}
+		else {
+			// Assign click event
+			elem.addEventListener("click", function(e){
+				// Prevent default action of element
+				e.preventDefault();	
+				// Run class function
+				processChange(this);
+			});
 		}
 	};
 
 	// Run when DOM has finished loading
 	document.addEventListener("DOMContentLoaded", function() {
-		// Run first time
-		initDataClass();
-	});
 
-	// On dataClass custom event fire, look again for new data-class instances
-	document.body.addEventListener("dataClass", function() {
-		initDataClass();
-	});	
+		// Grab all elements with required data-attributes
+		var elems = document.querySelectorAll("[data-class]");
+
+		// Loop through our matches and add click events
+		for(var a = 0; a < elems.length; a++){
+			initDataClass(elems[a]);
+		}
+
+		// Setup mutation observer to track changes for matching elements added after initial DOM render
+		var observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				for(var d = 0; d < mutation.addedNodes.length; d++) {
+					if(mutation.addedNodes[d].getAttribute("data-class")) {
+						initDataClass(mutation.addedNodes[d]);
+					}
+				}
+			});    
+		});
+
+		// Define type of change our observer will watch out for
+		observer.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+	}); 
+
+
 
 })();
