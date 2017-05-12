@@ -277,6 +277,15 @@ In the above example, when our element is either clicked or a left swipe is dete
 				processChange(this);
 			});
 		}
+		// Add keyboard event for enter key to mimic anchor functionality
+		elem.addEventListener("keypress", function(e){
+			if(e.which === 13) {
+				// Prevent default action of element
+				e.preventDefault();
+				// Run state function
+				processChange(this);
+			}
+		});
 	};
 
 	// Run when DOM has finished loading
