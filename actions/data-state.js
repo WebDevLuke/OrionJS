@@ -19,6 +19,8 @@ the data-state logic assignment. Otherwise when your new data-state element is c
 data-state (Required)
 - A comma seperated list of states you wish to add.
 - If a state is missed, the last valid state will be used. This allows you to have one state for many actions.
+- If an aria-attribute is passed, the function will look for a matching attribute on the target element and it will be set to true/false
+- Otherwise the state is added/removed/toggled as a class.
 
 data-state-element (Optional)
 - A comma seperated list of elements data-state will target.
