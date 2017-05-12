@@ -162,6 +162,14 @@ In the above example, when our element is either clicked or a left swipe is dete
 				var dataClassElementValue = dataClassElement[b];
 			} 
 
+			// If scope isn't found, use last valid one
+			if(dataClassScope[b] !== undefined) {
+				var cachedScope = dataClassScope[b];
+			}
+			else if(cachedScope) {
+				dataClassScope[b] = cachedScope;
+			}
+
 			// Grab elem references, apply scope if found
 			if(dataClassScope && dataClassScope[b] !== "false") {
 
@@ -279,7 +287,6 @@ In the above example, when our element is either clicked or a left swipe is dete
 			subtree: true
 		});
 	}); 
-
 
 
 })();
