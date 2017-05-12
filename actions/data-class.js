@@ -147,12 +147,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 
 		// Find out which has the biggest length between classes and elements and use that length as loop number
 		// This is to make sure situations where we have one data-class-element value and many data-class values are correctly setup
-		if(dataClassElement.length >= dataClass.length) {
-			var dataLength = dataClassElement.length;
-		}
-		else {
-			var dataLength = dataClass.length;
-		}
+		var dataLength = Math.max(dataClassElement.length, dataClass.length);
 
 		// Loop through to assign out event listeners
 		for(var b = 0; b < dataLength; b++) {
@@ -174,10 +169,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 			if(dataClassScope && dataClassScope[b] !== "false") {
 
 				// Grab parent
-				// If one isn't found, keep last valid one
-				if(dataClassScope[b] !== undefined) {
-					var elemParent = closestParent(elem, dataClassScope[b]);
-				}
+				var elemParent = closestParent(elem, dataClassScope[b]);
 
 				// Grab all matching child elements of parent
 				var elemRef = elemParent.querySelectorAll("." + dataClassElementValue);
