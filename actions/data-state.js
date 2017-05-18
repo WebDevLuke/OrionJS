@@ -305,8 +305,11 @@ In the above example, when our element is either clicked or a left swipe is dete
 		var observer = new MutationObserver(function(mutations) {
 			mutations.forEach(function(mutation) {
 				for(var d = 0; d < mutation.addedNodes.length; d++) {
-					if(mutation.addedNodes[d].getAttribute("data-state")) {
-						initDataState(mutation.addedNodes[d]);
+					// Check if we're dealing with an element node
+					if(typeof mutation.addedNodes[d].getAttribute === 'function') {
+						if(mutation.addedNodes[d].getAttribute("data-state")) {
+							initDataState(mutation.addedNodes[d]);
+						}
 					}
 				}
 			});    
