@@ -151,7 +151,7 @@ In the above example, when our element is either clicked or a left swipe is dete
 		// This is to make sure situations where we have one data-state-element value and many data-state values are correctly setup
 		var dataLength = Math.max(dataStateElement.length, dataState.length);
 
-		// Loop through to assign out event listeners
+		// Loop
 		for(var b = 0; b < dataLength; b++) {
 
 			// If a data-state-element value isn't found, use last valid one
@@ -245,55 +245,58 @@ In the above example, when our element is either clicked or a left swipe is dete
 	},
 	// Init function
 	initDataState = function(elem){
-		// Detect data-swipe attribute
-		if(elem.getAttribute("data-state-swipe")){
-			// Grab swipe specific data     
-			var elemSwipe = elem.getAttribute("data-state-swipe"),
-			elemSwipe = elemSwipe.split(", "),
-			direction = elemSwipe[0],
-			elemSwipeBool = elemSwipe[1],
-			currentElem = elem;
+	    // Detect data-swipe attribute before we do anything, as its optional
+	    // If not present, assign click event like before
+	    if(elem.getAttribute("data-state-swipe")){
+	        // Grab swipe specific data from data-state-swipe
+	        var elemSwipe = elem.getAttribute("data-state-swipe"),
+		        elemSwipe = elemSwipe.split(", "),
+		        direction = elemSwipe[0],
+		        elemSwipeBool = elemSwipe[1],
+		        currentElem = elem;
 
-			if(elemSwipeBool === "false" || !elemSwipeBool) {
-				// Assign click event
-				elem.addEventListener("click", function(e){
-					// Prevent default action of element
-					e.preventDefault();	
-					// Run state function
-					processChange(this);
-				});
-			}
-			swipeDetect(elem, function(swipedir){
-				if(swipedir === direction) {
-					// Run state function
-					processChange(currentElem);
-				}
-			})
-		}
-		else {
-			// Assign click event
-			elem.addEventListener("click", function(e){
-				// Prevent default action of element
-				e.preventDefault();	
-				// Run state function
-				processChange(this);
-			});
-		}
-		// Add keyboard event for enter key to mimic anchor functionality
-		elem.addEventListener("keypress", function(e){
-			if(e.which === 13) {
-				// Prevent default action of element
-				e.preventDefault();
-				// Run state function
-				processChange(this);
-			}
-		});
+		  // If the behaviour flag is set to "false", or not set at all, then assign our click event
+	        if(elemSwipeBool === "false" || !elemSwipeBool) {
+	            // Assign click event
+	            elem.addEventListener("click", function(e){
+	                // Prevent default action of element
+	                e.preventDefault(); 
+	                // Run state function
+	                processChange(this);
+	            });
+	        }
+	        // Use our swipeDetect helper function to determine if the swipe direction matches our desired direction
+	        swipeDetect(elem, function(swipedir){
+	            if(swipedir === direction) {
+	                // Run state function
+	                processChange(currentElem);
+	            }
+	        })
+	    }
+	    else {
+	        // Assign click event
+	        elem.addEventListener("click", function(e){
+	            // Prevent default action of element
+	            e.preventDefault(); 
+	            // Run state function
+	            processChange(this);
+	        });
+	    }
+	    // Add keyboard event for enter key to mimic anchor functionality
+	    elem.addEventListener("keypress", function(e){
+	        if(e.which === 13) {
+	            // Prevent default action of element
+	            e.preventDefault();
+	            // Run state function
+	            processChange(this);
+	        }
+	    });
 	};
 
 	// Run when DOM has finished loading
 	document.addEventListener("DOMContentLoaded", function() {
 
-		// Grab all elements with required data-attributes
+		// Grab all elements with required attributes
 		var elems = document.querySelectorAll("[data-state]");
 
 		// Loop through our matches and add click events

@@ -29,10 +29,10 @@ fireEvent(myElem, "signup", {
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 // Import modernizr
-require("../vendor/modernizr.js");
+require("../vendor/modernizrClone.js");
 
 module.exports = function(elem, event, details) {
-	if(Modernizr.customevent) {
+	if(ModernizrClone.customevent) {
 		// Declare event
 		var myEvent = new CustomEvent(event, {"bubbles":true, "cancelable":false,"detail":details});
 		// Trigger it!
