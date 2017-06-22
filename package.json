@@ -1,6 +1,6 @@
 {
   "name": "orionjs",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Luke Harrison",
   "description": "OrionJS is a simple collection of reusable functions to help streamline DOM manipulation in UI development.",
   "homepage": "http://www.lukeharrison.net",
