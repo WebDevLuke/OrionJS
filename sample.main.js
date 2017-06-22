@@ -29,5 +29,5 @@ require("../../node_modules/orionjs/vendor/modernizr.js");
 Reusable JS functionality
 */
 
-require("../../node_modules/orionjs/actions/data-class.js");
+require("../../node_modules/orionjs/actions/data-state.js");
 require("../../node_modules/orionjs/actions/data-toggle-text.js");
