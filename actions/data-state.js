@@ -310,8 +310,17 @@ In the above example, when our element is either clicked or a left swipe is dete
 				for(var d = 0; d < mutation.addedNodes.length; d++) {
 					// Check if we're dealing with an element node
 					if(typeof mutation.addedNodes[d].getAttribute === 'function') {
+						// grab any child elements of added node with data-state
+						var dataStateChildren = mutation.addedNodes[d].querySelectorAll("[data-state]");
+						// If added node has data-state
 						if(mutation.addedNodes[d].getAttribute("data-state")) {
 							initDataState(mutation.addedNodes[d]);
+						}
+						// Apply event listeners to relevant child elements
+						else if(dataStateChildren) {
+							for(var i = 0; i < dataStateChildren.length; i++) {
+								initDataState(dataStateChildren[i]);
+							}
 						}
 					}
 				}
